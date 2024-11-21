@@ -15,7 +15,7 @@ import (
 var session *scs.SessionManager
 var testApp config.AppConfig
 
-func TestMain(m *testing.M)  {
+func TestMain(m *testing.M) {
 	// what am i going to put in the session
 	gob.Register(models.Reservation{})
 
@@ -32,6 +32,21 @@ func TestMain(m *testing.M)  {
 
 	app = &testApp
 
-
 	os.Exit(m.Run())
+}
+
+type myWritter struct{}
+
+func (tw *myWritter) Header() http.Header {
+	var h http.Header
+	return h
+}
+
+func (tw *myWritter) WriteHeader(i int) {
+	
+}
+
+func (tw *myWritter) Write(b []byte) (int, error) {
+	length := len(b)
+	return length, nil
 }
