@@ -92,22 +92,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.3.4/dist/js/datepicker-full.min.js"></script>
 
     <!-- alert -->
-    <script src="https://unpkg.com/notie"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notie"></script>
 
     <!-- sweet alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-
-
-    {{ block "js" . }}
-
-    {{ end }}
-
-
-
-
 
     <script>
         let attention = Prompt();
@@ -252,6 +240,24 @@
         }
 
     </script>
+
+    <!-- setup message types using notie via notify() -->
+    {{ with .Error}}
+        <script> notify("{{ . }}", "error"); </script>
+    {{ end }}
+
+    {{ with .Flash }}
+        <script> notify("{{ . }}", "success"); </script>
+    {{ end }}
+
+    {{ with .Warning }}
+        <script> notify("{{ . }}", "warning"); </script>
+    {{ end }}
+
+    {{ block "js" . }}
+
+    {{ end }}
+
 </body>
 
 </html>
